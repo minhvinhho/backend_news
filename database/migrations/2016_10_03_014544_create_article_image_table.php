@@ -15,10 +15,6 @@ class CreateArticleImageTable extends Migration
     {
         Schema::create('article_image', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('image_id')->unsigned();
-            $table->foreign('image_id')
-                ->references('id')
-                ->on('images');
             $table->integer('article_id')->unsigned();
             $table->foreign('article_id')
                 ->references('id')
