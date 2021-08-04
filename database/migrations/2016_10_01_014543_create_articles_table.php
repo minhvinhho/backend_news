@@ -33,11 +33,8 @@ class CreateArticlesTable extends Migration
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories');
-            $table->text('background_img');
-
-
-            $table->text('podcast');
-            //$table->string('language')->default('ben');
+            $table->text('background_img')->nullable();
+            $table->text('podcast')->nullable();
             $table->timestamps();
         });
     }

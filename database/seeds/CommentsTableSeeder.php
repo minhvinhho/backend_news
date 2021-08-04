@@ -16,7 +16,7 @@ class CommentsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::statement('TRUNCATE TABLE Comments RESTART IDENTITY CASCADE');
         if (app()->environment() != 'production') {
             foreach (Article::all() as $article) {
                 Comment::factory()->count(3)->create([
@@ -25,6 +25,6 @@ class CommentsTableSeeder extends Seeder
                 ]);
             }
         }
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        DB::statement('TRUNCATE TABLE Comments RESTART IDENTITY CASCADE');
     }
 }
