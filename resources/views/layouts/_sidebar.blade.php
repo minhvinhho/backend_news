@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default sidebar">
+<nav style="background-color:MediumAquaMarine;" style="background-color:MediumAquaMarine;" class="navbar navbar-default sidebar">
     <div>
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">

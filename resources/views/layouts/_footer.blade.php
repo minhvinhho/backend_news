@@ -1,4 +1,4 @@
-<footer class="container-fluid border-top">
+<footer style="background-color:powderblue;" class="container-fluid border-top">
     <div class="row purple-text text-darken-4 footer">
         <div class="col-sm-2 text-center">© {{date('Y').' '.optional($globalConfigs)->copyright_owner}} </div>
         @if(!auth()->check())

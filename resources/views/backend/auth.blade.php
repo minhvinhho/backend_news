@@ -1,9 +1,10 @@
 @extends('layouts.admin')
 @section('content')
+<body background="http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg" >
     <div class="col-sm-offset-2 col-sm-6 margin-top-15">
         <div class="panel panel-primary">
             <div class="panel-heading text-center">
-                <strong>Welcome</strong>
+                <strong>BAP Blog Login System</strong>
             </div>
             <div class="panel-body">
                 <form method="post" action="{{route('login')}}">

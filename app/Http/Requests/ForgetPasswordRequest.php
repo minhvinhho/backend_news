@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ArticlesRequest extends FormRequest
+class ForgetPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,15 +26,14 @@ class ArticlesRequest extends FormRequest
     public function rules()
     {
         return [
-            'heading' => 'required|string',
-            'background_img'=>'required',
-            'podcast'=>'required',
-            'content' => 'required|string',
-            'user_id' => 'required',
-            'category_id' => 'required'
+            'email'=>'required|email',
         ];
     }
-
+    public function messages(){
+        return [
+            "email.required"=>"Bạn chưa nhập email!!!","email.email"=>"Vui lòng nhập đúng định dạng email!!!",
+        ];
+    }
     public function failedValidation(Validator $validator){
         throw new HttpResponseException(response()->json(['status'=>false,'message'=>$validator->errors()]));
     }

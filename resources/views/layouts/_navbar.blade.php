@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default no-margin-bottom" id="top-navbar">
+<nav style="background-color:powderblue;" class="navbar navbar-default no-margin-bottom" id="top-navbar">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
