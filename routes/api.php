@@ -45,12 +45,13 @@ Route::group(['prefix'=>'article'],function(){
     Route::post('increaseViews',[ApiArticlesController::class,'increaseViews']);
 });
 
+Route::Post("/register",[AuthController::class,'register']);
+Route::Post("/login",[AuthController::class,'signin']);
 
-
-Route::get('/comment/{id}', [ApiCommentController::class,'getCommentById']);
-Route::post('/comment',[ApiCommentController::class,'addComment']);
-Route::post('/repcomment',[ApiCommentController::class,'addRepComment']);
-
+Route::middleware('auth:api')->group(function () {
+    Route::Get('/me',[AuthController::class,'getMe']);
+    Route::Post('/change_password',[AuthController::class,'changePassword']);
+});
 
 // Get all category
 Route::get('/categories', [ApiCategoriesController::class, 'getCategory']);
@@ -68,19 +69,19 @@ Route::get('/keyword/{id}', [ApiKeywordsController::class, 'getKeywordById']);
 Route::get('/articles', [ApiArticlesController::class, 'getArticle']);
 
 // Get article detail
-//Route::get('/article/{id}', [ApiArticlesController::class, 'getArticleById']);
+Route::get('/article/{id}', [ApiArticlesController::class, 'getArticleById']);
 
 // Add article
 Route::post('/article', [ApiArticlesController::class, 'addArticle'])->middleware('auth:api');
 
 // Get all Comment
-//Route::get('/comments', [ApiCommentController::class, 'getComment']);
-//
-//// Get comment detail
-//Route::get('/comment/{id}', [ApiCommentController::class, 'getCommentById']);
-//
-//// Add comment
-//Route::post('/comment', [ApiCommentController::class, 'addComment'])->middleware('auth:api');
+Route::get('/comments', [ApiCommentController::class, 'getComment']);
+
+// Get comment detail
+Route::get('/comment/{id}', [ApiCommentController::class, 'getCommentById']);
+
+// Add comment
+Route::post('/comment', [ApiCommentController::class, 'addComment'])->middleware('auth:api');
 
 // Get all Like
 Route::get('/likes', [ApiLikeController::class, 'getLike']);
@@ -92,7 +93,7 @@ Route::get('/like/{id}', [ApiLikeController::class, 'getLikeById']);
 Route::post('/like', [ApiLikeController::class, 'addLike'])->middleware('auth:api');
 
 // DisLike
-Route::post('/unlike/{id}', [ApiLikeController::class, 'unlike'])->middleware('auth:api');
+Route::post('/dislike/{id}', [ApiLikeController::class, 'disLike'])->middleware('auth:api');
 
 // Get all rep cmt
 Route::get('/repcomments', [ApiRepCommentsController::class, 'getRepComment']);

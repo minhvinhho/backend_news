@@ -13,7 +13,7 @@ class ApiArticlesController extends Controller
 {
     /**
      * @OA\Get(
-     *   path="/articles",
+     *   path="/api/articles",
      *   tags={"Articles"},
      *   operationId="get_articles",
      *   summary="Articles List",

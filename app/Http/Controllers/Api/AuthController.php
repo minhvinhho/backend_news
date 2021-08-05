@@ -25,30 +25,41 @@ class AuthController extends Controller
     // Register
     /** 
      * @OA\Post( 
-     * path="/register", 
+     * path="/api/register", 
      * summary="Register",
      * description="Login by email, password",
      * operationId="authLogin",
      * tags={"Register"},
      * @OA\RequestBody(
      * required=true,
-     * description="Pass user credentials",
      * @OA\JsonContent(
-     * required={"email","password"},
-     * @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
-     * @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     * @OA\Property(property="persistent", type="boolean", example="true"),
+     * required={"name","role_id","email","password","avatar_link"},
+     * @OA\Property(property="name", type="string", format="text", example="minhcute"),
+     * @OA\Property(property="role_id", type="string", format="text", example="4"),
+     * @OA\Property(property="email", type="string", format="email", example="hominh4078@gmail.com"),
+     * @OA\Property(property="password", type="string", format="password", example="12345678"),
+     * @OA\Property(property="password_confirmation", type="string", format="password", example="12345678"),
+     * @OA\Property(property="avatar_link", type="string", format="text", example="abc.com")
      *  ),
      * ),
      * @OA\Response(
-     * response=422,
-     * description="Wrong credentials response",
-     * @OA\JsonContent(
-     * @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again")
+     * response=200,
+     * description="successful operation",
+     * @OA\Response(response=400, description="Bad request"),
+     * @OA\Response(response=404, description="Resource Not Found"),
      *    )
      *  )
      * )
      **/
+
+    public function register(UserRegisterRequest $request)
+    {
+        $validated = $request->validated();
+        $validated["password"] = bcrypt($validated["password"]);
+        $user = User::create($validated);
+        return response()->json(["user" => $user, 'msg' => 'Sign up successfully'], 200);
+    }
+    
     public function Registration(RegistrationRequest $request)
     {
         $data = $request->validated();
@@ -75,7 +86,7 @@ class AuthController extends Controller
     // Login
     /** 
      * @OA\Post( 
-     * path="/login", 
+     * path="/api/login", 
      * summary="Sign in",
      * description="Login by email, password",
      * operationId="authLogin",
@@ -87,7 +98,6 @@ class AuthController extends Controller
      * required={"email","password"},
      * @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
      * @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     * @OA\Property(property="persistent", type="boolean", example="true"),
      *  ),
      * ),
      * @OA\Response(
@@ -165,33 +175,35 @@ class AuthController extends Controller
         return response()->json($Authors,200);
     }
 
+    //sign in
+    public function signin(UserLoginRequest $request)
+    {
+        $validated = $request->validated();
+
+        if (auth()->attempt($validated)) {
+            $user = auth()->user();
+            $token = $user->createToken("app")->accessToken;
+            return response()->json(['user' => $user, 'token' => $token, 'msg' => "Successful login"], 200);
+        } else {
+            return response()->json(['msg' => "Login failed"], 211);
+        }
+    }
     // Get me
-    /** 
-     * @OA\Get( 
-     * path="/me", 
-     * summary="Get me",
-     * description="Login by email, password",
-     * operationId="authLogin",
-     * tags={"Get me"},
-     * @OA\RequestBody(
-     * required=true,
-     * description="Pass user credentials",
-     * @OA\JsonContent(
-     * required={"email","password"},
-     * @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
-     * @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     * @OA\Property(property="persistent", type="boolean", example="true"),
-     *  ),
-     * ),
-     * @OA\Response(
-     * response=422,
-     * description="Wrong credentials response",
-     * @OA\JsonContent(
-     * @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again")
-     *    )
+     /**
+     * @OA\Get(
+     *   path="/api/me",
+     *   tags={"Get me"},
+     *   operationId="logout",
+     *   summary="Logout",
+     *   security={{"Bearer":{}}},
+     *   @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
      *  )
-     * )
-     **/
+     */
     public function getMe()
     {
         $user = auth()->user();
@@ -201,7 +213,7 @@ class AuthController extends Controller
     // Change pass
     /** 
      * @OA\Post( 
-     * path="/change_password", 
+     * path="/api/change_password", 
      * summary="Change password",
      * description="Login by email, password",
      * operationId="authLogin",
