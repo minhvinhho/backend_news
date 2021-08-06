@@ -8,6 +8,22 @@ use App\Models\RepComment;
 
 class ApiRepCommentsController extends Controller
 {
+        /**
+     * @OA\Get(
+     *   path="/api/repcomments",
+     *   tags={"RepComments"},
+     *   operationId="get_repcomments",
+     *   summary="Rep Comments List",
+     *   @OA\Response(
+     *    response=200,
+     *    description="success",
+     *   ),
+     *   @OA\Response(
+     *    response=400,
+     *    description="error",
+     *   ),
+     *  )
+     */  
     public function getRepComment() {
         return response()->json(RepComment::all(), 200);
     }

@@ -7,7 +7,13 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
-/** * @OA\Info( * title="API BAP NEWS", * version="1.0.0", * ) */
+/**
+ *     @OA\Info(
+ *         version="1.0",
+ *         title="BAP NEWS API",
+ *         description="BAP NEWS API",
+ * )
+ **/
 
 class Controller extends BaseController
 {

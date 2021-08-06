@@ -9,6 +9,22 @@ use Illuminate\Http\Request;
 
 class ApiLikeController extends Controller
 {
+    /**
+     * @OA\Get(
+     *   path="/api/likes",
+     *   tags={"Likes"},
+     *   operationId="get_Likes",
+     *   summary="Likes List",
+     *   @OA\Response(
+     *    response=200,
+     *    description="success",
+     *   ),
+     *   @OA\Response(
+     *    response=400,
+     *    description="error",
+     *   ),
+     *  )
+     */  
     public function getLike() {
         return response()->json(Like::all(), 200);
     }
@@ -35,6 +51,4 @@ class ApiLikeController extends Controller
         $likes->delete();
         return response()->json(['message' => 'Dislike Successful'], 200);
     }
-    //get like theo article
-    //get like theo user
 }

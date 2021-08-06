@@ -10,6 +10,22 @@ use Illuminate\Http\Request;
 
 class ApiCommentController extends Controller
 {
+    /**
+     * @OA\Get(
+     *   path="/api/comments",
+     *   tags={"Comments"},
+     *   operationId="get_Comments",
+     *   summary="Comments List",
+     *   @OA\Response(
+     *    response=200,
+     *    description="success",
+     *   ),
+     *   @OA\Response(
+     *    response=400,
+     *    description="error",
+     *   ),
+     *  )
+     */
     public function getComment() {
         return response()->json(Comment::all(), 200);
     }

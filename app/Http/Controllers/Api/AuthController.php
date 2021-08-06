@@ -23,34 +23,48 @@ use App\Mail\ForgetPasswordMail;
 class AuthController extends Controller
 {
     // Register
-    /** 
-     * @OA\Post( 
-     * path="/api/register", 
-     * summary="Register",
-     * description="Login by email, password",
-     * operationId="authLogin",
-     * tags={"Register"},
-     * @OA\RequestBody(
-     * required=true,
-     * @OA\JsonContent(
-     * required={"name","role_id","email","password","avatar_link"},
-     * @OA\Property(property="name", type="string", format="text", example="minhcute"),
-     * @OA\Property(property="role_id", type="string", format="text", example="4"),
-     * @OA\Property(property="email", type="string", format="email", example="hominh4078@gmail.com"),
-     * @OA\Property(property="password", type="string", format="password", example="12345678"),
-     * @OA\Property(property="password_confirmation", type="string", format="password", example="12345678"),
-     * @OA\Property(property="avatar_link", type="string", format="text", example="abc.com")
-     *  ),
-     * ),
-     * @OA\Response(
-     * response=200,
-     * description="successful operation",
-     * @OA\Response(response=400, description="Bad request"),
-     * @OA\Response(response=404, description="Resource Not Found"),
-     *    )
-     *  )
-     * )
-     **/
+        /**
+        * @OA\Post(
+        * path="/api/register",
+        * operationId="Register",
+        * tags={"Register"},
+        * summary="User Register",
+        * description="User Register here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"name","role_id","email", "password", "password_confirmation","avatar_link"},
+        *               @OA\Property(property="name", type="text"),
+        *               @OA\Property(property="role_id", type="text"),
+        *               @OA\Property(property="email", type="text"),
+        *               @OA\Property(property="password", type="password"),
+        *               @OA\Property(property="password_confirmation", type="password"),
+        *               @OA\Property(property="avatar_link", type="text"),
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Register Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Register Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        **/
 
     public function register(UserRegisterRequest $request)
     {
@@ -84,31 +98,44 @@ class AuthController extends Controller
     }
 
     // Login
-    /** 
-     * @OA\Post( 
-     * path="/api/login", 
-     * summary="Sign in",
-     * description="Login by email, password",
-     * operationId="authLogin",
-     * tags={"LOGIN"},
-     * @OA\RequestBody(
-     * required=true,
-     * description="Pass user credentials",
-     * @OA\JsonContent(
-     * required={"email","password"},
-     * @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
-     * @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *  ),
-     * ),
-     * @OA\Response(
-     * response=422,
-     * description="Wrong credentials response",
-     * @OA\JsonContent(
-     * @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again")
-     *    )
-     *  )
-     * )
-     **/
+     /**
+        * @OA\Post(
+        * path="/api/signin",
+        * operationId="authLogin",
+        * tags={"Login"},
+        * summary="User Login",
+        * description="Login User Here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"email", "password"},
+        *               @OA\Property(property="email", type="email"),
+        *               @OA\Property(property="password", type="password")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Login Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Login Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        **/
     public function Login(LoginRequest $request){
         $data = $request->validated();
         if(auth()->attempt($data)){
@@ -189,21 +216,39 @@ class AuthController extends Controller
         }
     }
     // Get me
-     /**
+    /**
      * @OA\Get(
-     *   path="/api/me",
-     *   tags={"Get me"},
-     *   operationId="logout",
-     *   summary="Logout",
-     *   security={{"Bearer":{}}},
-     *   @OA\Response(
+     *      path="/api/getme",
+     *      operationId="getme",
+     *      tags={"Get Me"},
+     *  security={{"passport": {}}},
+     *      summary="Get list of users",
+     *      description="Returns user login",
+     *      @OA\Response(
      *          response=200,
-     *          description="successful operation"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *     ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     * @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     * @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
      *  )
-     */
+     **/
     public function getMe()
     {
         $user = auth()->user();
@@ -215,17 +260,18 @@ class AuthController extends Controller
      * @OA\Post( 
      * path="/api/change_password", 
      * summary="Change password",
-     * description="Login by email, password",
-     * operationId="authLogin",
+     * operationId="authLogout",
      * tags={"Change password"},
+     * security={
+     * {"passport": {}},
+     * },
      * @OA\RequestBody(
      * required=true,
      * description="Pass user credentials",
      * @OA\JsonContent(
-     * required={"email","password"},
-     * @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     * required={"password","password_confirmation"},
      * @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     * @OA\Property(property="persistent", type="boolean", example="true"),
+     * @OA\Property(property="password_confirmation", type="string", format="password", example="PassWord12345"),
      *  ),
      * ),
      * @OA\Response(
@@ -255,7 +301,7 @@ class AuthController extends Controller
     //Log out
     /**
      * @OA\Post(
-     *   path="/logout",
+     *   path="/api/logout",
      *   tags={"Log Out"},
      *   operationId="logout",
      *   summary="Logout",

@@ -46,11 +46,13 @@ Route::group(['prefix'=>'article'],function(){
 });
 
 Route::Post("/register",[AuthController::class,'register']);
-Route::Post("/login",[AuthController::class,'signin']);
+Route::Post("/signin",[AuthController::class,'signin']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::Get('/me',[AuthController::class,'getMe']);
+    Route::Get('/getme',[AuthController::class,'getMe']);
     Route::Post('/change_password',[AuthController::class,'changePassword']);
+    Route::Post('/logout',[AuthController::class,'logout']);
+
 });
 
 // Get all category

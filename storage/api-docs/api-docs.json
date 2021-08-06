@@ -1,8 +1,9 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "API BAP NEWS",
-        "version": "1.0.0"
+        "title": "BAP NEWS API",
+        "description": "BAP NEWS API",
+        "version": "1.0"
     },
     "paths": {
         "/api/articles": {
@@ -22,135 +23,163 @@
                 }
             }
         },
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Categories List",
+                "operationId": "get_categories",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            }
+        },
+        "/api/comments": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Comments List",
+                "operationId": "get_Comments",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            }
+        },
+        "/api/keywords": {
+            "get": {
+                "tags": [
+                    "keywords"
+                ],
+                "summary": "Keywords List",
+                "operationId": "get_keywords",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            }
+        },
+        "/api/likes": {
+            "get": {
+                "tags": [
+                    "Likes"
+                ],
+                "summary": "Likes List",
+                "operationId": "get_Likes",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            }
+        },
+        "/api/repcomments": {
+            "get": {
+                "tags": [
+                    "RepComments"
+                ],
+                "summary": "Rep Comments List",
+                "operationId": "get_repcomments",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            }
+        },
         "/api/register": {
             "post": {
                 "tags": [
                     "Register"
                 ],
-                "summary": "Register",
-                "description": "Login by email, password",
-                "operationId": "authLogin",
+                "summary": "User Register",
+                "description": "User Register here",
+                "operationId": "Register",
                 "requestBody": {
-                    "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
                                 "required": [
                                     "name",
                                     "role_id",
                                     "email",
                                     "password",
+                                    "password_confirmation",
                                     "avatar_link"
                                 ],
                                 "properties": {
                                     "name": {
-                                        "type": "string",
-                                        "format": "text",
-                                        "example": "minhcute"
+                                        "type": "text"
                                     },
                                     "role_id": {
-                                        "type": "string",
-                                        "format": "text",
-                                        "example": "4"
+                                        "type": "text"
                                     },
                                     "email": {
-                                        "type": "string",
-                                        "format": "email",
-                                        "example": "hominh4078@gmail.com"
+                                        "type": "text"
                                     },
                                     "password": {
-                                        "type": "string",
-                                        "format": "password",
-                                        "example": "12345678"
+                                        "type": "password"
                                     },
                                     "password_confirmation": {
-                                        "type": "string",
-                                        "format": "password",
-                                        "example": "12345678"
+                                        "type": "password"
                                     },
                                     "avatar_link": {
-                                        "type": "string",
-                                        "format": "text",
-                                        "example": "abc.com"
+                                        "type": "text"
                                     }
                                 },
                                 "type": "object"
                             }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "successful operation"
-                    }
-                }
-            }
-        },
-        "/api/login": {
-            "post": {
-                "tags": [
-                    "LOGIN"
-                ],
-                "summary": "Sign in",
-                "description": "Login by email, password",
-                "operationId": "authLogin",
-                "requestBody": {
-                    "description": "Pass user credentials",
-                    "required": true,
-                    "content": {
+                        },
                         "application/json": {
-                            "schema": {
-                                "required": [
-                                    "email",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "format": "email",
-                                        "example": "user1@mail.com"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "format": "password",
-                                        "example": "PassWord12345"
-                                    }
-                                },
-                                "type": "object"
-                            }
+                            "schema": {}
                         }
                     }
                 },
                 "responses": {
-                    "422": {
-                        "description": "Wrong credentials response",
+                    "201": {
+                        "description": "Register Successfully",
                         "content": {
                             "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Sorry, wrong email address or password. Please try again"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
+                                "schema": {}
                             }
                         }
-                    }
-                }
-            }
-        },
-        "/api/me": {
-            "get": {
-                "tags": [
-                    "Get me"
-                ],
-                "summary": "Logout",
-                "operationId": "logout",
-                "responses": {
+                    },
                     "200": {
-                        "description": "successful operation"
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "400": {
                         "description": "Bad request"
@@ -158,10 +187,106 @@
                     "404": {
                         "description": "Resource Not Found"
                     }
+                }
+            }
+        },
+        "/api/signin": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "User Login",
+                "description": "Login User Here",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Login Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Login Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/getme": {
+            "get": {
+                "tags": [
+                    "Get Me"
+                ],
+                "summary": "Get list of users",
+                "description": "Returns user login",
+                "operationId": "getme",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
                 },
                 "security": [
                     {
-                        "Bearer": []
+                        "passport": []
                     }
                 ]
             }
@@ -172,8 +297,7 @@
                     "Change password"
                 ],
                 "summary": "Change password",
-                "description": "Login by email, password",
-                "operationId": "authLogin",
+                "operationId": "authLogout",
                 "requestBody": {
                     "description": "Pass user credentials",
                     "required": true,
@@ -181,23 +305,19 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "email",
-                                    "password"
+                                    "password",
+                                    "password_confirmation"
                                 ],
                                 "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "format": "email",
-                                        "example": "user1@mail.com"
-                                    },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
                                         "example": "PassWord12345"
                                     },
-                                    "persistent": {
-                                        "type": "boolean",
-                                        "example": "true"
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
                                     }
                                 },
                                 "type": "object"
@@ -222,10 +342,15 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
             }
         },
-        "/logout": {
+        "/api/logout": {
             "post": {
                 "tags": [
                     "Log Out"

@@ -7,6 +7,22 @@ use App\Models\Keyword;
 
 class ApiKeywordsController extends Controller
 {
+    /**
+     * @OA\Get(
+     *   path="/api/keywords",
+     *   tags={"keywords"},
+     *   operationId="get_keywords",
+     *   summary="Keywords List",
+     *   @OA\Response(
+     *    response=200,
+     *    description="success",
+     *   ),
+     *   @OA\Response(
+     *    response=400,
+     *    description="error",
+     *   ),
+     *  )
+     */
     public function getKeyword() {
         return response()->json(Keyword::all(), 200);
     }

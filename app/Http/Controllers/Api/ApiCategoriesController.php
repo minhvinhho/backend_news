@@ -9,6 +9,22 @@ use Illuminate\Http\Request;
 
 class ApiCategoriesController extends Controller
 {
+    /**
+     * @OA\Get(
+     *   path="/api/categories",
+     *   tags={"Categories"},
+     *   operationId="get_categories",
+     *   summary="Categories List",
+     *   @OA\Response(
+     *    response=200,
+     *    description="success",
+     *   ),
+     *   @OA\Response(
+     *    response=400,
+     *    description="error",
+     *   ),
+     *  )
+     */
     public function getCategory() {
         return response()->json(Category::all(), 200);
     }
