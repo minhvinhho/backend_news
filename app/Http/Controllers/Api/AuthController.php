@@ -27,7 +27,7 @@ class AuthController extends Controller
         * @OA\Post(
         * path="/api/register",
         * operationId="Register",
-        * tags={"Register"},
+        * tags={"Auth"},
         * summary="User Register",
         * description="User Register here",
         *     @OA\RequestBody(
@@ -102,7 +102,7 @@ class AuthController extends Controller
         * @OA\Post(
         * path="/api/signin",
         * operationId="authLogin",
-        * tags={"Login"},
+        * tags={"Auth"},
         * summary="User Login",
         * description="Login User Here",
         *     @OA\RequestBody(
@@ -220,9 +220,9 @@ class AuthController extends Controller
      * @OA\Get(
      *      path="/api/getme",
      *      operationId="getme",
-     *      tags={"Get Me"},
+     *      tags={"Auth"},
      *  security={{"passport": {}}},
-     *      summary="Get list of users",
+     *      summary="Get me",
      *      description="Returns user login",
      *      @OA\Response(
      *          response=200,
@@ -261,7 +261,7 @@ class AuthController extends Controller
      * path="/api/change_password", 
      * summary="Change password",
      * operationId="authLogout",
-     * tags={"Change password"},
+     * tags={"Auth"},
      * security={
      * {"passport": {}},
      * },
@@ -302,7 +302,7 @@ class AuthController extends Controller
     /**
      * @OA\Post(
      *   path="/api/logout",
-     *   tags={"Log Out"},
+     *   tags={"Auth"},
      *   operationId="logout",
      *   summary="Logout",
      *   security={{"Bearer":{}}},

@@ -30,6 +30,31 @@ class ApiArticlesController extends Controller
     public function getArticle() {
         return response()->json(Article::all(), 200);
     }
+
+    /**
+     *  @OA\Get(
+     *      path="/api/article/{id}",
+     *      tags={"Articles"},
+     *      summary="get article by id",
+     *      description="get article by id",
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="error."
+     *      ),
+     *  )
+     */
     public function getArticleById($id) {
         $articles = Article::join('categories','articles.category_id','=','categories.id')
             ->join('users','articles.user_id','=','users.id')
@@ -40,6 +65,49 @@ class ApiArticlesController extends Controller
             ->get();
         return response()->json($articles);
     }
+     /**
+        * @OA\Post(
+        * path="/api/article",
+        * operationId="Article",
+        * tags={"Articles"},
+        * summary="Add Articles",
+        * description="Add Articles",
+        *      security={
+        *          {"bearer_token":{}},
+        *      },
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"heading","background_img","podcast", "content", "user_id","category_id"},
+        *               @OA\Property(property="heading", type="text"),
+        *               @OA\Property(property="content", type="text"),
+        *               @OA\Property(property="user_id", type="text"),
+        *               @OA\Property(property="category_id", type="text"),
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Add Articles Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Add Articles Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        **/
 
     public function addArticle(ArticlesRequest $request) {
         $data = $request->validated();

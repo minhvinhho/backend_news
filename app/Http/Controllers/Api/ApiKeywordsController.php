@@ -10,7 +10,7 @@ class ApiKeywordsController extends Controller
     /**
      * @OA\Get(
      *   path="/api/keywords",
-     *   tags={"keywords"},
+     *   tags={"Keywords"},
      *   operationId="get_keywords",
      *   summary="Keywords List",
      *   @OA\Response(
@@ -26,7 +26,30 @@ class ApiKeywordsController extends Controller
     public function getKeyword() {
         return response()->json(Keyword::all(), 200);
     }
-
+    /**
+     *  @OA\Get(
+     *      path="/api/keyword/{id}",
+     *      tags={"Keywords"},
+     *      summary="get Keywords by id",
+     *      description="get Keywords by id",
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="error."
+     *      ),
+     *  )
+     */
     public function getKeywordById($id) {
         $keywords = Keyword::find($id);
         if(is_null($keywords)) {
@@ -35,5 +58,4 @@ class ApiKeywordsController extends Controller
         return response()->json($keywords::find($id), 200);
     }
 
-    //get keyword theo article
 }

@@ -29,6 +29,30 @@ class ApiCategoriesController extends Controller
         return response()->json(Category::all(), 200);
     }
 
+    /**
+     *  @OA\Get(
+     *      path="/api/category/{id}",
+     *      tags={"Categories"},
+     *      summary="get Categories by id",
+     *      description="get Categories by id",
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="default",
+     *          description="error."
+     *      ),
+     *  )
+     */
     public function getCategoryById($id) {
         $categories = Category::find($id);
         if(is_null($categories)) {

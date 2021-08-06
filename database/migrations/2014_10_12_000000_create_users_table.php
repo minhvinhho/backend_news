@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->text('avatar_link')->nullable();
             $table->text('sociable')->nullable();
-            $table->integer('role_id')->unsigned()->default(4);
+            $table->biginteger('role_id')->unsigned()->default(4);
             $table->foreign('role_id')
                 ->references('id')
                 ->on('roles')

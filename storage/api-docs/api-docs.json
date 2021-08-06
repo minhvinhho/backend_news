@@ -23,6 +23,115 @@
                 }
             }
         },
+        "/api/article/{id}": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "get article by id",
+                "description": "get article by id",
+                "operationId": "f0460bcdf9a5dd0590006dbdbf9132a0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "default": {
+                        "description": "error."
+                    }
+                }
+            }
+        },
+        "/api/article": {
+            "post": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Add Articles",
+                "description": "Add Articles",
+                "operationId": "Article",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "heading",
+                                    "background_img",
+                                    "podcast",
+                                    "content",
+                                    "user_id",
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "heading": {
+                                        "type": "text"
+                                    },
+                                    "content": {
+                                        "type": "text"
+                                    },
+                                    "user_id": {
+                                        "type": "text"
+                                    },
+                                    "category_id": {
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Add Articles Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Add Articles Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
         "/api/categories": {
             "get": {
                 "tags": [
@@ -36,6 +145,34 @@
                     },
                     "400": {
                         "description": "error"
+                    }
+                }
+            }
+        },
+        "/api/category/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "get Categories by id",
+                "description": "get Categories by id",
+                "operationId": "3309ef988482a9fc75c939b19db211c9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "default": {
+                        "description": "error."
                     }
                 }
             }
@@ -57,10 +194,121 @@
                 }
             }
         },
+        "/api/comment/{id}": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "get Comments by id",
+                "description": "get Comments by id",
+                "operationId": "6b7a8e6184fe325b70681d31c69340f7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "default": {
+                        "description": "error."
+                    }
+                }
+            }
+        },
+        "/api/comment": {
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Add Comments",
+                "description": "Add Comments",
+                "operationId": "Comments",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "content",
+                                    "email",
+                                    "name",
+                                    "article_id",
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "content": {
+                                        "type": "text"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "name": {
+                                        "type": "text"
+                                    },
+                                    "article_id": {
+                                        "type": "text"
+                                    },
+                                    "user_id": {
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Add Comments Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Add Comments Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
         "/api/keywords": {
             "get": {
                 "tags": [
-                    "keywords"
+                    "Keywords"
                 ],
                 "summary": "Keywords List",
                 "operationId": "get_keywords",
@@ -70,6 +318,34 @@
                     },
                     "400": {
                         "description": "error"
+                    }
+                }
+            }
+        },
+        "/api/keyword/{id}": {
+            "get": {
+                "tags": [
+                    "Keywords"
+                ],
+                "summary": "get Keywords by id",
+                "description": "get Keywords by id",
+                "operationId": "b2e1ff28a7f7730c5515e79d87b2299e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "default": {
+                        "description": "error."
                     }
                 }
             }
@@ -91,6 +367,133 @@
                 }
             }
         },
+        "/api/like/{id}": {
+            "get": {
+                "tags": [
+                    "Likes"
+                ],
+                "summary": "get Likes by id",
+                "description": "get Likes by id",
+                "operationId": "5ebdea2b1d2a720bde96fd125aa13b58",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "default": {
+                        "description": "error."
+                    }
+                }
+            }
+        },
+        "/api/like": {
+            "post": {
+                "tags": [
+                    "Likes"
+                ],
+                "summary": "Add Likes",
+                "description": "Add Likes",
+                "operationId": "Likes",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "article_id",
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "article_id": {
+                                        "type": "text"
+                                    },
+                                    "user_id": {
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Add Likes Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Add Likes Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/unlike/{id}": {
+            "delete": {
+                "tags": [
+                    "Likes"
+                ],
+                "summary": "Unlike Article",
+                "description": "Unlike Article",
+                "operationId": "bfb0bc8866c6f5c74c6fda342626fe5e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "default": {
+                        "description": "error."
+                    }
+                }
+            }
+        },
         "/api/repcomments": {
             "get": {
                 "tags": [
@@ -108,10 +511,113 @@
                 }
             }
         },
+        "/api/repcomment/{id}": {
+            "get": {
+                "tags": [
+                    "RepComments"
+                ],
+                "summary": "Rep Comments by id",
+                "description": "Rep Comments by id",
+                "operationId": "1efea3b32db7407a42964f4c4767989b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "default": {
+                        "description": "error."
+                    }
+                }
+            }
+        },
+        "/api/repcomment": {
+            "post": {
+                "tags": [
+                    "RepComments"
+                ],
+                "summary": "Add Rep Comments",
+                "description": "Add Rep Comments",
+                "operationId": "repcomment",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "comment_id",
+                                    "user_id",
+                                    "content"
+                                ],
+                                "properties": {
+                                    "comment_id": {
+                                        "type": "text"
+                                    },
+                                    "user_id": {
+                                        "type": "text"
+                                    },
+                                    "content": {
+                                        "type": "text"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Add Rep Comments Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Add Rep Comments Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
         "/api/register": {
             "post": {
                 "tags": [
-                    "Register"
+                    "Auth"
                 ],
                 "summary": "User Register",
                 "description": "User Register here",
@@ -193,7 +699,7 @@
         "/api/signin": {
             "post": {
                 "tags": [
-                    "Login"
+                    "Auth"
                 ],
                 "summary": "User Login",
                 "description": "Login User Here",
@@ -259,9 +765,9 @@
         "/api/getme": {
             "get": {
                 "tags": [
-                    "Get Me"
+                    "Auth"
                 ],
-                "summary": "Get list of users",
+                "summary": "Get me",
                 "description": "Returns user login",
                 "operationId": "getme",
                 "responses": {
@@ -294,7 +800,7 @@
         "/api/change_password": {
             "post": {
                 "tags": [
-                    "Change password"
+                    "Auth"
                 ],
                 "summary": "Change password",
                 "operationId": "authLogout",
@@ -353,7 +859,7 @@
         "/api/logout": {
             "post": {
                 "tags": [
-                    "Log Out"
+                    "Auth"
                 ],
                 "summary": "Logout",
                 "operationId": "logout",

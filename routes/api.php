@@ -94,8 +94,8 @@ Route::get('/like/{id}', [ApiLikeController::class, 'getLikeById']);
 // Add Like
 Route::post('/like', [ApiLikeController::class, 'addLike'])->middleware('auth:api');
 
-// DisLike
-Route::post('/dislike/{id}', [ApiLikeController::class, 'disLike'])->middleware('auth:api');
+// Unlike
+Route::post('/unlike/{id}', [ApiLikeController::class, 'Unlike'])->middleware('auth:api');
 
 // Get all rep cmt
 Route::get('/repcomments', [ApiRepCommentsController::class, 'getRepComment']);

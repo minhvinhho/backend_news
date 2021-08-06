@@ -17,10 +17,6 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('alias');
-            // $table->integer('parent_category_id')->unsigned()->nullable();
-            /*$table->foreign('parent_category_id')
-                ->references('id')
-                ->on('categories');*/
             $table->integer('position')->unsigned()->nullable();
             $table->integer('is_active')->unsigned()->default(1);
             $table->timestamps();
