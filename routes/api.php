@@ -45,6 +45,7 @@ Route::group(['prefix'=>'article'],function(){
     Route::post('increaseViews',[ApiArticlesController::class,'increaseViews']);
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////
 Route::Post("/register",[AuthController::class,'register']);
 Route::Post("/signin",[AuthController::class,'signin']);
 

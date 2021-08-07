@@ -13,12 +13,7 @@ class Comment extends Model
     protected $guarded = ['id'];
     protected $dates = ['published_at'];
     protected $appends = ['createdAtHuman', 'publishedAtHuman'];
-    protected $fillable = [
-        'content',
-        'article_id',
-        'user_id',
-        'token'
-    ];
+
     public function article()
     {
         return $this->belongsTo(Article::class);

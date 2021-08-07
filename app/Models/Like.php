@@ -11,7 +11,6 @@ class Like extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    // protected $dates = ['published_at'];
     
     public function article()
     {

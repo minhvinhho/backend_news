@@ -15,15 +15,6 @@ class Article extends Model
     protected $guarded = ['id'];
     protected $dates = ['published_at'];
 
-    protected $fillable = [
-        'background_img',
-        'heading',
-        'podcast',
-        'content',
-        'user_id',
-        'category_id',
-    ];
-    
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -34,11 +25,6 @@ class Article extends Model
         return $this->hasMany(Comment::class)->with('user')->orderBy('id');
 
     }    
-
-    // public function idArticles()
-    // {
-    //     return $this->belongsTo(Category::class);
-    // }
 
     public function likeArticle()
     {

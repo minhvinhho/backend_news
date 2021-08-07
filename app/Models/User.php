@@ -19,24 +19,11 @@ class User extends Authenticatable
 
     protected $guarded = ['id'];
     protected $appends = ['createdAtHuman'];
-    protected $fillable = [
-        'name',
-        'role_id',
-        'email',
-        'password',
-        'token',
-        'avatar_link',
-        'sociable'
-    ];
+
     public function articles()
     {
         return $this->hasMany(Article::class);
     }
-
-    // public function image()
-    // {
-    //     return $this->belongsTo(Image::class);
-    // }
 
     public function reader()
     {
