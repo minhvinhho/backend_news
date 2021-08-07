@@ -47,7 +47,7 @@ Route::group(['prefix'=>'article'],function(){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 Route::Post("/register",[AuthController::class,'register']);
-Route::Post("/signin",[AuthController::class,'signin']);
+Route::Post("/login",[AuthController::class,'signin']);
 
 Route::middleware('auth:api')->group(function () {
     Route::Get('/getme',[AuthController::class,'getMe']);

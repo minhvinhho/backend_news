@@ -16,7 +16,7 @@ return [
     | you may use many connections at once using the Database library.
     |
     */
-
+    // change pgsql
     'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
@@ -79,6 +79,21 @@ return [
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
+        
+        // 'pgsql' => [
+        //     'driver' => 'pgsql',
+        //     'url' => env('DATABASE_URL'),
+        //     'host' => $DATABASE_URL['DB_HOST'],
+        //     'port' => $DATABASE_URL['DB_PORT'],
+        //     'database' => ltrim($DATABASE_URL['DB_DATABASE'], "/"),
+        //     'username' => $DATABASE_URL['DB_USERNAME'],
+        //     'password' => $DATABASE_URL['DB_PASSWORD'],
+        //     'charset' => 'utf8',
+        //     'prefix' => '',
+        //     'prefix_indexes' => true,
+        //     'schema' => 'public',
+        //     'sslmode' => 'prefer',
+        // ],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',

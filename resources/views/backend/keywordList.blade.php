@@ -2,11 +2,22 @@
 @section('content')
     <div class="panel panel-default no-margin-bottom">
         <div class="panel-heading">
-            <strong>All Keywords</strong>
+            <strong>Add Keywords</strong>
         </div>
         <div class="panel-body">
             <form action="{{route('add-keyword')}}" method="post">
                 {{csrf_field()}}
+                <table>
+                <!-- <strong>Add Keywords</strong> -->
+                    <td class="{{$errors->has('name') ? 'has-error has-feedback' : ''}}">
+                        <input type="text" name="name" class="form-control" placeholder="Name*" value="{{old('name')}}">
+                    </td>
+                    <td class="text-center">
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </td>
+                </table>
+                <br>
+                <strong>All Keywords</strong>
                 <table class="table table-hover" id="keywordList">
                     <tr class="text-center">
                         <th>ID</th>
@@ -17,21 +28,23 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td class="{{$errors->has('name') ? 'has-error has-feedback' : ''}}">
+                        <!-- <td class="{{$errors->has('name') ? 'has-error has-feedback' : ''}}">
                             <input type="text" name="name" class="form-control" placeholder="Name*" value="{{old('name')}}">
-                        </td>
-                        <td>Now</td>
+                        </td> -->
                         <td></td>
-                        <td class="text-center">
+                        <td></td>
+                        <!-- <td class="text-center">
                             <button type="submit" class="btn btn-success">Add</button>
-                        </td>
+                        </td> -->
                     </tr>
                     @foreach($keywords as $keyword)
                         <tr>
                             <td>{{$keyword->id}}</td>
                             <td>{{$keyword->name}}</td>
                             <td>{{$keyword->createdAtHuman}}</td>
-                            <td>{{$keyword->articles->count()}}</td>
+                            <td>
+                            <a href="{{route('articles-by-keyword', $keyword->name)}}" target="_blank">{{$keyword->articles->count()}}</a>
+                            </td>
                             <td class="text-center">
                                 <span class="fa fa-edit text-primary pointer" onclick="showKeywordForm({{$keyword}})"></span>                              
                                 <a href="{{route('toggle-keyword-active', $keyword->id)}}">
