@@ -25,9 +25,14 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         Schema::defaultStringLength(191);
+        
         if(env('REDIRECT_HTTPS')) {
             $url->formatScheme('https');
         }
+
+        $this->app->bind('path.public', function() {
+            return base_path().'/../public_html';
+        });
     }
 
     /**
