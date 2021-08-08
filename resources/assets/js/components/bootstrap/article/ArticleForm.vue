@@ -4,6 +4,7 @@
             <input type="text" class="form-control" name="heading" v-model="article_data.heading"
                    placeholder="*Heading..." required>
         </div>
+        <strong>Select Category</strong> <br>
         <div class="form-group">
             <select class="form-control" name="category_id" v-model="article_data.category_id">
                 <option :value="category.id" v-for="category in categories">
@@ -11,6 +12,7 @@
                 </option>
             </select>
         </div>
+        <strong>Input Content</strong>
         <div class="form-group">
             <markdown-editor v-model="article_data.content" ref="markdownEditor"></markdown-editor>
         </div>
