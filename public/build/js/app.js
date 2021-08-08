@@ -5104,6 +5104,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -81929,14 +81932,22 @@ var render = function() {
               }
             }
           },
-          _vm._l(_vm.categories, function(category) {
-            return _c("option", { domProps: { value: category.id } }, [
-              _vm._v(
-                "\n                " + _vm._s(category.name) + "\n            "
-              )
-            ])
-          }),
-          0
+          [
+            _c("option", { attrs: { value: "" } }, [
+              _vm._v("\n                asass\n            ")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.categories, function(category) {
+              return _c("option", { domProps: { value: category.id } }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(category.name) +
+                    "\n            "
+                )
+              ])
+            })
+          ],
+          2
         )
       ]),
       _vm._v(" "),
@@ -96765,9 +96776,9 @@ function alertSuccess(message) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Xampp\htdocs\backend_news\resources\assets\js\app.js */"./resources/assets/js/app.js");
-__webpack_require__(/*! D:\Xampp\htdocs\backend_news\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
-module.exports = __webpack_require__(/*! D:\Xampp\htdocs\backend_news\resources\assets\sass\frontend.scss */"./resources/assets/sass/frontend.scss");
+__webpack_require__(/*! D:\XAMPP\htdocs\backend_news\resources\assets\js\app.js */"./resources/assets/js/app.js");
+__webpack_require__(/*! D:\XAMPP\htdocs\backend_news\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+module.exports = __webpack_require__(/*! D:\XAMPP\htdocs\backend_news\resources\assets\sass\frontend.scss */"./resources/assets/sass/frontend.scss");
 
 
 /***/ }),
